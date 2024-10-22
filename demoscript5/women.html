@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thời Trang Nữ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Navbar -->
+    <nav class="bg-gray-800 p-4 text-white">
+        <div class="container mx-auto flex justify-between">
+            <div class="text-xl font-bold">Thời Trang</div>
+            <ul class="flex space-x-4">
+                <li><a href="women.html" class="hover:text-gray-300">Thời Trang Nữ</a></li>
+                <li><a href="men.html" class="hover:text-gray-300">Thời Trang Nam</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Thời Trang Nữ Section -->
+    <section class="container mx-auto px-4 py-8">
+        <h1 class="text-center text-red-700 text-4xl font-bold my-8">Thời Trang Nữ</h1>
+        <div id="women-card" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <!-- Product cards will be injected here by JavaScript -->
+        </div>
+    </section>
+
+    <script>
+        const womenArray = [
+            {
+                id: "1",
+                img: "https://th.bing.com/th/id/OIP.gI7TQrUUAkWtECB0TkbjJwHaHa?w=203&h=203&c=7&r=0&o=5&pid=1.7",
+                name: "Quần jeans nữ",
+                code: "KO0002",
+                price: "370.000 VND",
+                discount: "269.000 VND",
+            },
+            {
+                id: "2",
+                img: "https://th.bing.com/th/id/R.337a986f734459cd4220b1a660212e0b?rik=E%2bzoZm73DGu7pA&pid=ImgRaw&r=0",
+                name: "Áo Khoác nữ",
+                code: "VN0002",
+                price: "369.000 VND",
+                discount: "249.000 VND",
+            },
+            {
+                id: "3",
+                img: "https://th.bing.com/th/id/OIP.EIkHRentVf24Edq-FHKzswHaHn?rs=1&pid=ImgDetMain",
+                name: "Áo Phông nữ",
+                code: "US0002",
+                price: "360.000 VND",
+                discount: "159.000 VND",
+            },
+        ];
+
+        const womenCardContainer = document.getElementById("women-card");
+
+        womenArray.forEach(item => {
+            womenCardContainer.innerHTML += `
+                <div class="border border-gray-300 p-4 rounded-lg shadow-lg bg-white">
+                    <img src="${item.img}" alt="${item.name}" class="w-full h-64 object-cover rounded-t-lg">
+                    <div class="flex justify-between mt-4">
+                        <h3 class="text-lg font-semibold">${item.name}</h3>
+                        <h3 class="text-gray-500">${item.code}</h3>
+                    </div>          
+                    <div class="flex justify-between mt-2">
+                        <p class="text-red-600 font-bold">${item.discount}</p>
+                        <p class="line-through text-gray-500">${item.price}</p>
+                    </div>
+                    <button class="bg-red-600 text-white py-2 px-4 rounded mt-4 w-full hover:bg-red-700">Đặt mua</button>
+                </div>
+            `;
+        });
+    </script>
+
+</body>
+</html>

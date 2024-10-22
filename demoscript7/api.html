@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 300px;
+        }
+        .card h2 {
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+        .card p {
+            margin: 8px 0;
+        }
+        img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="product-container"></div>
+
+    <script>
+        async function fetchProduct() {
+            try {
+                const response = await fetch('https://api.coindesk.com/v1/bpi/currentprice.json');
+                const product = await response.json();
+
+                const { id, title: name, price, description: features, image } = product;
+
+                const card = document.createElement('div');
+                card.className = 'card';
+
+                const img = document.createElement('img');
+                img.src = image;
+                img.alt = name;
+
+                const h2 = document.createElement('h2');
+                h2.textContent = name;
+
+                const priceTag = document.createElement('p');
+                priceTag.innerHTML = `<strong>Price:</strong> $${price}`;
+
+                const descriptionTag = document.createElement('p');
+                descriptionTag.innerHTML = `<strong>Description:</strong> ${features}`;
+
+                const warrantyTag = document.createElement('p');
+                warrantyTag.innerHTML = `<strong>Warranty:</strong> 2 years`;
+
+                card.appendChild(img);
+                card.appendChild(h2);
+                card.appendChild(priceTag);
+                card.appendChild(descriptionTag);
+                card.appendChild(warrantyTag);
+
+                document.getElementById('product-container').appendChild(card);
+
+            } catch (error) {
+                console.error('Error fetching product: ', error);
+            }
+        }
+
+        fetchProduct();
+    </script>
+
+</body>
+</html>

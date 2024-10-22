@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo1</title>
+    <style>
+        .section {
+            width: 100%;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: solid 2px #007bff;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: inline-block;
+            width: 120px;
+        }
+
+        input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            margin-bottom: 10px;
+            margin-left: 80px;
+            border-radius: 4px;
+            border: 1px solid #150d0d;
+            flex: 2;
+        }
+
+        input[type="number"] {
+            width: 60%;
+            padding: 10px;
+            margin-bottom: 10px;
+            margin-left: 80px;
+            border-radius: 4px;
+            border: 1px solid #150d0d;
+            flex: 2;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            margin-right: 10px;
+            background-color: black;
+            color: white;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid rgb(211, 211, 211);
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #150d0d;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="section">
+        <h1>New product</h1>
+        <hr>
+        <br>
+        <form id="frm">
+            <p>
+                <label>Product Name</label>
+                <input type="text" name="pname" id="pname">
+            </p>
+            <p>
+                <label>Product Quantity</label>
+                <input type="number" name="qty" id="qty">
+            </p>
+            <p>
+                <label>Product Price</label>
+                <input type="number" name="pri" id="pri">
+            </p>
+            <p>
+                <button type="button" onClick="add()">ADD</button>
+                <button type="button">CANCEL</button>
+            </p>
+        </form>
+        <table id="tb">
+            <thead id="thead">
+                <tr>
+                    <th>No</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Sub Total</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                <tr>
+                    <td>Total</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td id="total">0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        var id = 0;
+        function add() {
+            id++;
+            var pname = frm.pname.value;
+            var qty = frm.qty.value;
+            var price = frm.pri.value;
+            var sub = qty * price;
+            var row = "<tr>";
+            row += "<td>" + id + "</td>";
+            row += "<td>" + pname + "</td>";
+            row += "<td>" + qty + "</td>";
+            row += "<td>" + price + "</td>";
+            row += "<td>" + sub + "</td>";
+            row += "</tr>";
+
+            var total = document.getElementById("total").innerHTML;
+            total = parseInt(total) + parseInt(sub);
+
+            var row_total = "<tr>";
+            row_total += "<td>Total</td>";
+            row_total += "<td></td>";
+            row_total += "<td></td>";
+            row_total += "<td></td>";
+            row_total += "<td id='total'>" + total + "</td>";
+            row_total += "</tr>";
+
+            document.getElementById("thead").innerHTML += row;
+            document.getElementById("tbody").innerHTML = row_total;
+
+            frm.pname.value = "";
+            frm.qty.value = "";
+            frm.pri.value = "";
+        }
+    </script>
+</body>
+
+</html>

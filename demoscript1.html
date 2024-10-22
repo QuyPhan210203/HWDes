@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+<style>
+    #kq {
+        background-color: yellow;
+        font-size: 30px;
+        color: red;
+    }
+
+    .box1 {
+        height: 20px;
+        width: 20px;
+        float: left;
+        border: 1px solid black;
+        margin-left: 5px;
+        margin-bottom: 5px;
+        background: red;
+    }
+
+    .box2 {
+        height: 20px;
+        width: 20px;
+        float: left;
+        border: 1px solid black;
+        margin-left: 5px;
+        margin-bottom: 5px;
+        background: gray;
+    }
+</style>
+
+</script>
+</style>
+
+<body>
+    <p id="kq">kq la</p>
+
+    <script type="text/javascript">
+        var a = "Hello";
+        var b = "World";
+        var c = a + " " + b;
+        document.getElementById('kq').innerHTML = c;
+    </script>
+
+    <script type="text/javascript">
+        for (var i = 1; i <= 6; i++) {
+            for (var j = 1; j <= 10; j++) {
+                if (i % 2 == 0) {
+                    document.write("<div class='box1'> </div>")
+                }
+                else {
+                    document.write("<div class='box2'> </div>")
+                }
+            }
+            document.write("<div style='clear:both'></div>")
+        }
+    </script>
+</body>
+
+</html>

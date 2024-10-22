@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <style>
+        .title {
+            color: rgba(0, 0, 255, 0.591);
+            font-size: 40px;
+            text-align: center;
+        }
+
+        .container {
+            width: 50%;
+            height: 50%;
+            background-color: rgba(128, 128, 128, 0.558);
+            margin: auto;
+            border: solid 3px #ff0000;
+        }
+
+        .diem_hk {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            margin-left: 50px;
+        }
+
+        .tongket,
+        .hk1,
+        .hk2,
+        .hk {
+            display: flex;
+        }
+
+        #diem_hk1 {
+            width: 70%;
+            height: 30px;
+            margin-top: 15px;
+            margin-left: 10px;
+        }
+
+        #diem_hk2 {
+            width: 70%;
+            height: 30px;
+            margin-top: 15px;
+            margin-left: 10px;
+        }
+
+        #namhoc {
+            width: 50px;
+            height: 30px;
+            margin-top: 16px;
+            margin-left: 10px;
+        }
+
+        .kq {
+            width: 70%;
+            height: 30px;
+            margin-top: 15px;
+            margin-left: 10px;
+            border: solid 1px #00000057;
+            background-color: white;
+        }
+
+        .diemtong {
+            font-size: 20px;
+            margin-left: 10px;
+        }
+
+        .kq {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .diemtk {
+            color: red;
+            font-size: 50px;
+            margin-left: 50px;
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 50px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            width: 50x;
+            height: 30px;
+            padding: 5px 10px;
+            cursor: pointer;
+
+        }
+    </style>
+    <div class="container">
+        <h1 class="title">BANG DIEM CUA EM</h1>
+        <div class="hk1">
+            <p class="diem_hk">Semester 1:</p>
+            <input type="text" id="diem_hk1" name="diem_hk1" placeholder="Nhap diem">
+        </div>
+        <div class="hk2">
+            <p class="diem_hk">Semester 2:</p>
+            <input type="text" id="diem_hk2" name="diem_hk1" placeholder="Nhap diem">
+        </div>
+        <div class="hk">
+            <p class="diem_hk">nam:</p>
+            <select id="namhoc" name="nam">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+        <div class="tongket">
+            <p class="diem_hk">Summarize:</p>
+            <div class="kq">
+                <h1 class="diemtong" id="sum"></h1>
+            </div>
+        </div>
+        <h1 class="diemtk" id="diemtk"></h1>
+        <div class="button">
+            <button id="submit">OK</button>
+            <button id="cancel">Cancel</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('submit').onclick = function () {
+            var sem1Score = parseFloat(document.getElementById('diem_hk1').value);
+            var sem2Score = parseFloat(document.getElementById('diem_hk2').value);
+            var nam = parseInt(document.getElementById('namhoc').value);
+            var diemtk;
+
+            if (nam == 1) {
+                diemtk = (sem1Score + sem2Score) / 2;
+            } else if (nam == 2) {
+                diemtk = (sem1Score + sem2Score * 2) / 3;
+            } else if (nam == 3) {
+                diemtk = (sem1Score + sem2Score * 3) / 4;
+            } else {
+                diemtk = (sem1Score + sem2Score * 4) / 5;
+            }
+            document.getElementById("sum").innerHTML = diemtk;
+
+            if (diemtk >= 8) {
+                document.getElementById("diemtk").innerHTML = "Hoc Sinh Gioi";
+            } else if (diemtk >= 6.5) {
+                document.getElementById("diemtk").innerHTML = "Hoc Sinh Kha";
+            } else if (diemtk >= 5) {
+                document.getElementById("diemtk").innerHTML = "Hoc Sinh Trung Binh";
+            } else {
+                document.getElementById("diemtk").innerHTML = "Hoc Sinh Yeu";
+            }
+        }
+
+        document.getElementById('cancel').onclick = function () {
+            document.getElementById('diem_hk1').value = '';
+            document.getElementById('diem_hk2').value = '';
+            document.getElementById('namhoc').selectedIndex = 0;
+            document.getElementById("sum").innerText = '';
+            document.getElementById("diemtk").innerText = '';
+        }
+
+
+    </script>
+</body>
+
+</html>

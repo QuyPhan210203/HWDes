@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Cards</title>
+    <style>
+        .cards-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 8px;
+            width: 200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+        .card p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="userCards" class="cards-container"></div>
+
+<script>
+    const users = [
+        {
+            'name': 'Wao',
+            'address': 'Dnag',
+            'age': 20
+        },
+        {
+            'name': 'Quy',
+            'address': 'NY',
+            'age': 22
+        },
+        {
+            'name': 'Di',
+            'address': 'Hnoi',
+            'age': 30
+        }
+    ];
+
+    const userCardsContainer = document.getElementById('userCards');
+
+    users.forEach(({name, address, age}) => {
+        const card = `
+            <div class="card">
+                <h2>${name}</h2>
+                <p>Age: ${age}</p>
+                <p>Address: ${address}</p>
+            </div>
+        `;
+        userCardsContainer.innerHTML += card;
+    });
+</script>
+
+</body>
+</html>

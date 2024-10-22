@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo2</title>
+</head>
+
+<body>
+    <style>
+        body {
+            background-color: cadetblue;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            width: 20%;
+
+            label {
+                padding: 5px 0 5px 0;
+                font-weight: bold;
+            }
+
+            input {
+                width: 100%;
+                padding: 5px;
+                border: 1px solid black;
+                border-radius: 5px;
+                flex: 2;
+            }
+        }
+
+        .buttonGroup {
+            display: flex;
+            gap: 10px;
+            padding: 10px 0;
+
+            button {
+                background: linear-gradient(to bottom, #f0f0f0, #d9d9d9);
+                border: 1px solid #a6a6a6;
+                font-size: large;
+                color: #333;
+                padding: 5px 10px;
+                box-shadow: 0 4px #999;
+                transition: all 0.2s ease;
+            }
+
+            button:active {
+                background: linear-gradient(to bottom, #d9d9d9, #f0f0f0);
+                box-shadow: 0 2px #666;
+                transform: translateY(2px);
+            }
+        }
+
+        .proTable {
+            background-color: aqua;
+            margin-top: 20px;
+
+            thead th {
+                border: 3px groove white;
+                text-align: center;
+                width: fit-content;
+            }
+
+            tr td {
+                text-align: center;
+                width: fit-content;
+            }
+        }
+
+        th,
+        td {
+            border: 1px solid;
+            padding: 8px;
+        }
+
+        #message {
+            color: darkred;
+            font-weight: bold;
+        }
+    </style>
+    <div class="content">
+        <h2>New product</h2>
+        <label for="nameCus">Fullname_Customer</label>
+        <input type="text" id="nameCus" name="nameCus">
+        <br>
+        <label for="nameCus">Id_Pro</label>
+        <input type="text" id="idPro" name="idPro">
+        <br>
+        <label for="namePro">Name_Pro</label>
+        <input type="text" id="namePro" name="namePro">
+        <br>
+        <label for="quantPro">Quantity_Pro</label>
+        <input type="text" id="quantPro" name="quantPro">
+        <br>
+        <label for="pricePro">Price_Pro</label>
+        <input type="text" id="pricePro" name="pricePro">
+        <br>
+    </div>
+
+    <div id="message" class="message"></div>
+
+    <div class="buttonGroup">
+        <button type="button" onclick="save()">Save</button>
+        <button type="button" onclick="show()">Show</button>
+        <button type="button" onclick="reset()">Reset</button>
+    </div>
+
+    <table class="proTable" hidden>
+        <thead>
+            <th>Auto_Increment</th>
+            <th>Fullname_Customer</th>
+            <th>Id_Pro</th>
+            <th>Name_Pro</th>
+            <th>Quantity_Pro</th>
+            <th>Price_Pro</th>
+            <th>Discount</th>
+            <th>Amount</th>
+            <th>Total</th>
+        </thead>
+        <tr>
+            <script>
+                var tableBody;
+                var table;
+                var data = [];
+
+                document.addEventListener('DOMContentLoaded', function () {
+                    table = document.querySelector('.proTable');
+
+
+                    if (table) {
+                        tableBody = table.querySelector('tbody');
+                    } else {
+                        console.error('Table element with class "proTable" not found.');
+                        return;
+                    }
+                });
+
+                function displayMessage(message, type = 'info') {
+                    const messageDiv = document.getElementById('message');
+                    messageDiv.textContent = message;
+                    messageDiv.className = `message ${type}`;
+                    setTimeout(() => {
+                        messageDiv.textContent = '';
+                        messageDiv.className = 'message';
+                    }, 3000);
+                }
+
+                function preventNegativeInput(event) {
+                    if (event.target.value < 0) {
+                        event.target.value = '';
+                        displayMessage('Negative values are not allowed.', 'error');
+                    }
+                }
+
+                function save() {
+                    const nameCus = document.getElementById('nameCus').value;
+                    const idPro = document.getElementById('idPro').value;
+                    const namePro = document.getElementById('namePro').value;
+                    const quantPro = document.getElementById('quantPro').value;
+                    const pricePro = document.getElementById('pricePro').value;
+
+                    // Validate empty inputs
+                    if (!nameCus || !idPro || !namePro || !quantPro || !pricePro) {
+                        displayMessage('Please fill in all fields.', 'error');
+                        return;
+                    }
+
+                    // Validate numeric inputs
+                    if (isNaN(idPro) || isNaN(quantPro) || isNaN(pricePro)) {
+                        displayMessage('Please enter valid numeric values for Product ID, Quantity, and Price.', 'error');
+                        return;
+                    }
+
+                    // Validate non-negative inputs
+                    if (idPro < 0 || quantPro < 0 || pricePro < 0) {
+                        displayMessage('Negative values are not allowed.', 'error');
+                        return;
+                    }
+
+                    const discount = calculateDiscount(quantPro, pricePro);
+                    const amount = quantPro * pricePro;
+                    const total = amount - discount;
+
+                    const entry = {
+                        nameCus,
+                        idPro,
+                        namePro,
+                        quantPro,
+                        pricePro,
+                        discount,
+                        amount,
+                        total
+                    };
+
+                    data.push(entry);
+                    alert('Data saved successfully!');
+                    addRowsToTable();
+                }
+
+                function show() {
+                    if (!table) {
+                        console.error('Table element with class "proTable" not found.');
+                        return;
+                    }
+
+                    table.hasAttribute('hidden') ? table.removeAttribute('hidden') : table.setAttribute('hidden', '');
+                }
+
+                function reset() {
+                    document.getElementById('nameCus').value = '';
+                    document.getElementById('idPro').value = '';
+                    document.getElementById('namePro').value = '';
+                    document.getElementById('quantPro').value = '';
+                    document.getElementById('pricePro').value = '';
+                }
+
+                function calculateDiscount(quantity, price) {
+                    return quantity > 10 ? price * 0.1 : 0; // 10% discount if quantity > 10
+                }
+
+                function addRowsToTable() {
+                    tableBody.innerHTML = ''; // Clear existing rows
+                    data.forEach((entry, index) => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${entry.nameCus}</td>
+            <td>${entry.idPro}</td>
+            <td>${entry.namePro}</td>
+            <td>${entry.quantPro}</td>
+            <td>${entry.pricePro}</td>
+            <td>${entry.discount}</td>
+            <td>${entry.amount}</td>
+            <td>${entry.total}</td>
+        `;
+                        tableBody.appendChild(row);
+                    });
+                }
+            </script>
+        </tr>
+    </table>
+</body>
+
+</html>

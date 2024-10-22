@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thời Trang Nam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Navbar -->
+    <nav class="bg-gray-800 p-4 text-white">
+        <div class="container mx-auto flex justify-between">
+            <div class="text-xl font-bold">Thời Trang</div>
+            <ul class="flex space-x-4">
+                <li><a href="women.html" class="hover:text-gray-300">Thời Trang Nữ</a></li>
+                <li><a href="men.html" class="hover:text-gray-300">Thời Trang Nam</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Thời Trang Nam Section -->
+    <section class="container mx-auto px-4 py-8">
+        <h1 class="text-center text-red-700 text-4xl font-bold my-8">Thời Trang Nam</h1>
+        <div id="men-card" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <!-- Product cards will be injected here by JavaScript -->
+        </div>
+    </section>
+
+    <script>
+        const menArray = [
+            {
+                id: "1",
+                img: "https://th.bing.com/th/id/OIP.d00BGh2ETzwN_Yp3IHLTmAHaLG?rs=1&pid=ImgDetMain",
+                name: "Quần short kaki",
+                price: "370.000 VND",
+            },
+            {
+                id: "2",
+                img: "https://th.bing.com/th/id/OIP.kNeB2_pKdW76RZrvW7QYBwHaHa?rs=1&pid=ImgDetMain",
+                name: "Quần baggy",
+                price: "398.000 VND",
+            },
+            {
+                id: "3",
+                img: "https://th.bing.com/th/id/OIP.yhSH7B8l7dhwPBaL03O3MAHaJM?w=204&h=253&c=7&r=0&o=5&pid=1.7",
+                name: "Quần tây",
+                price: "300.000 VND",
+            },
+            {
+                id: "4",
+                img: "https://th.bing.com/th/id/OIP.GZgQ7oOQ5cnBGAdvBtLr_wHaHa?w=204&h=204&c=7&r=0&o=5&pid=1.7",
+                name: "Quần jeans nam",
+                price: "300.000 VND",
+            },
+        ];
+
+        const menCardContainer = document.getElementById("men-card");
+
+        menArray.forEach(item => {
+            menCardContainer.innerHTML += `
+                <div class="border border-gray-300 p-4 rounded-lg shadow-lg bg-white">
+                    <img src="${item.img}" alt="${item.name}" class="w-full h-64 object-cover rounded-t-lg">
+                    <h3 class="text-center font-semibold mt-4">${item.name}</h3>
+                    <p class="text-center text-gray-600 mt-2">${item.price}</p>
+                    <button class="bg-blue-700 text-white py-2 px-4 rounded mt-4 w-full hover:bg-blue-800">Đặt mua</button>
+                </div>
+            `;
+        });
+    </script>
+
+</body>
+</html>

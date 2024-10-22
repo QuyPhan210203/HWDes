@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <div id="result"> </div>
+
+    <script>
+        //check if browser support ls
+        if (typeof (Storage) !== "undefined") {
+            //save
+            localStorage.setItem("website", "webvn.com");
+            //get value
+            document.getElementById("result").innerHTML =
+                localStorage.getItem("website");
+        } else {
+            document.getElementById("result").innerHTML =
+                "Sori, ur browser does not support local storage";
+        }
+    </script>
+</body>
+
+</html>
