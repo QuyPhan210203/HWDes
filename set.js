@@ -9,6 +9,7 @@ console.log(favoriteESports);
 
 console.log(favoriteESports.has('GAM'));
 console.log(favoriteESports.has('G2'));
+console.log(favoriteESports.has('DK'));
 
 favoriteESports.delete('T1');
 console.log(favoriteESports);
@@ -21,3 +22,7 @@ console.log(favoriteESports.size);
 
 favoriteESports.clear();
 console.log(favoriteESports.size);
+
+const favoriteESportsArray = ['GAM', 'T1', 'G2', 'GAM', 'T1', 'G2'];
+const uniqueESports = [...new Set(favoriteESportsArray)];
+console.log(uniqueESports); // ['GAM', 'T1', 'G2']
