@@ -9,7 +9,7 @@ console.log(favoriteESports);
 
 console.log(favoriteESports.has('GAM'));
 console.log(favoriteESports.has('G2'));
-console.log(favoriteESports.has('DK'));
+console.log(favoriteESports.has(''));
 
 favoriteESports.delete('T1');
 console.log(favoriteESports);
