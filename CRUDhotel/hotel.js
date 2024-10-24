@@ -65,8 +65,8 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(newHotel => {
-            fetchData(displayData); // Refresh the table data
-            addHotelForm.reset(); // Clear the form
+            fetchData(displayData);
+            addHotelForm.reset();
         })
         .catch(error => {
             console.error('Error adding hotel:', error);
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => response.json())
             .then(updatedHotel => {
-                fetchData(displayData); // Refresh the table data
+                fetchData(displayData);
             })
             .catch(error => {
                 console.error('Error updating hotel:', error);
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            fetchData(displayData); // Refresh the table data
+            fetchData(displayData);
         })
         .catch(error => {
             console.error('Error deleting hotel:', error);
